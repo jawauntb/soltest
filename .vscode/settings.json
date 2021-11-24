@@ -1,0 +1,5 @@
+{
+    "solidity-va.mode.active": true,
+    "solidity-va.debug.parser.showExceptions": true,
+    "solidity.compileUsingRemoteVersion": "v0.8.10+commit.fc410830"
+}

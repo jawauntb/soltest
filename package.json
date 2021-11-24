@@ -1,0 +1,32 @@
+{
+  "name": "soltest",
+  "version": "1.0.0",
+  "description": "playing around with solidity stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "solhint": "./node_modules/.bin/solhint -f table contracts/**/*.sol",
+    "prettier:solidity": "./node_modules/.bin/prettier --write contracts/**/*.sol"
+  },
+  "author": "Jawaun Brown",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run prettier:solidity"
+    }
+  },
+  "dependencies": {
+    "ganache-cli": "^6.12.2",
+    "mocha": "^9.1.3",
+    "solc": "^0.8.10",
+    "truffle-hdwallet-provider": "^1.0.17",
+    "web3": "^1.6.1"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
+    "solhint": "^3.3.6",
+    "solhint-plugin-prettier": "^0.0.5"
+  }
+}
