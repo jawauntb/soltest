@@ -1,7 +1,8 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const {interface, bytecode} = require('./compile')
-const provider = new HDWalletProvider('please insert your own 12 word mnemonic from metammask here', 'https://infure.io/<code>')
+const provider = new HDWalletProvider('please insert your own 12 word mnemonic from metammask here',
+'https://pyrmont.infura.io/v3/1sMlA1AI92GErqnaSgPuRJLdOIW')
 const web3 = new Web3(provider)
 
 const deploy = async () => {
