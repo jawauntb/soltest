@@ -1,3 +1,4 @@
 node_modules/
 solhint/
 migrations/
+package-lock.json
