@@ -7,17 +7,17 @@ const web3 = new Web3(ganache.provider())
 const {abi, bytecode} = require('../compile')
 
 let accounts;
-let example;
+let commission;
 
 beforeEach(async () => {
     accounts = await web3.eth.getAccounts();
-    example = await new web3.eth.Contract(abi)
-    .deploy({data:bytecode, arguments: ['Hello World']}).send({from: accounts[0], gas: "1000000"})
+    commission = await new web3.eth.Contract(abi)
+    .deploy({data:bytecode, arguments: []}).send({from: accounts[0], gas: "2000000"})
 })
 
-describe('Example', () => {
+describe('Commission', () => {
     it('deploys a sample contract', () => {
-        console.log(example);
-        assert.ok(example.options.address)
+        console.log(commission);
+        assert.ok(commission.options.address)
     })
 })

@@ -1,15 +1,23 @@
+//https://docs.soliditylang.org/en/develop/using-the-compiler.html
+
 const path = require('path');
-const examplePath = path.resolve(__dirname, 'contracts', 'Example.sol');
+const commissionPath = path.resolve(__dirname, 'contracts', 'Commission.sol');
+const incentivePath = path.resolve(__dirname, 'contracts', 'StructuredIncentive.sol');
+
 const fs = require('fs');
 const solc = require('solc');
-const source = fs.readFileSync(examplePath, 'UTF-8');
 
+const commissionSource = fs.readFileSync(commissionPath, 'UTF-8');
+const incentiveSource = fs.readFileSync(incentivePath, 'UTF-8');
 
 var input = {
     language: 'Solidity',
     sources: {
-        'Example.sol' : {
-            content: source
+        'Commission.sol' : {
+            content: commissionSource
+        },
+        'StructuredIncentive.sol' : {
+            content: incentiveSource
         }
     },
     settings: {
@@ -20,9 +28,12 @@ var input = {
         }
     }
 };
-var output = JSON.parse(solc.compile(JSON.stringify(input)));
+var unparsedOutput = solc.compile(JSON.stringify(input))
+console.log({unparsedOutput});
 
-var outputContracts = output.contracts['Example.sol']['Example']
+var output = JSON.parse(unparsedOutput);
+
+var outputContracts = output.contracts['Commission.sol']['Commission']
 console.log({output})
 module.exports.abi = outputContracts.abi;
 
