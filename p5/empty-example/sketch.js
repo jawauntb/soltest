@@ -1,5 +1,5 @@
 let font,
-  fontsize = 15;
+  fontsize = 25;
 
 function preload() {
   // Ensure the .ttf or .otf font stored in the assets directory
@@ -9,7 +9,7 @@ function preload() {
 
 function setup() {
   var lerpedback = lerpColor(color(purNigthSky), color(bluesteel), random(10)/random(10,80));
-  backcolor = lerpColor(lerpedback, color('black'), random(56)/random(16,400))
+  backcolor = lerpColor(lerpedback, color('black'), random(1700)/random(16,4000))
   let cnv = createCanvas(1400, 875, WEBGL);
   // Set text characteristics
   textFont(font);
@@ -18,16 +18,16 @@ function setup() {
   frameRate(15)
   createLoop({
     duration:10,
-    framesPerSecond: random(8,22),
+    framesPerSecond: random(9.20),
     gif:{
       render:true,
-      fileName:'city'+counter.toString()+'.gif',
+      fileName:'city' + random(25).toString()+'.gif',
       startLoop:0,
       endLoop:22,
-      download:true,
+      download:false,
     }
   })
-  animLoop.noiseFrequency(0.4)
+  // animLoop.noiseFrequency(10)
   // noLoop()
 }
 var nightBlue = (0, 24, 72)
@@ -59,42 +59,46 @@ function draw() {
   background(backcolor);
 	noFill();
 	stroke(255);
-  drawSun(17)
-	for (var i=0; i < 1400; i++) {
-		strokeWeight(random(1, 15));
-    stroke(whiteStar)
-		text(random(2), random(width-width*2+20, height));
+  drawSun(random(15,23))
+  var lightgrn = lerpColor(color('white'), color(techGreen), random(45)/50);
+	for (var i=-0; i < 1400; i++) {
+    // push()
+    textSize(random(3,66));
+    fill(random(7)< 5? random(7)< 3? lightgrn: techGreen: 'white')
+		text(floor(random(2)), random(width*(-2), width*4)+90, random(height/4, height*4)+80);
+    noFill()
+    // pop()
 	}
 	noStroke();
 	fill(0);
 	rect(1200, height - 100, width, 100);
-  makeCity(random(-120,30), random(-50, 35));
-  makeCity(40, -5);
-  // makeCity(80, 47);
-  makeCity(random(1000), random(-10, 25));
+  // makeCity(random(750), random(30));
+  // // makeCity(80, 47);
+  // // makeCity(random(1000), random(-10, 25));
   // makeCity(20, -800);
-  // makeCity(random(30), 10);
-	// makeCity(random(56,80), -1300);
-  // makeCity(random(30), random(-6,-10));
-  counter++
+  makeCity(random(30), 1000);
+	makeCity(random(56,80), -1300);
+  makeCity(random(30), random(-100,-10));
+  makeCity(random(16, 46000), random(10,400));
+  fill(random(40,255), random(1, 255), random(5,90))
 }
 
 function makeShimmer(){
-  ambientLight(random(233));
-  directionalLight(offwhite, random(20, width/2), random(100, height/2), random(70));
-  specularMaterial(random(240, 250));
-  shininess(400);
+  // ambientLight(random(4,233), random(4,220), random(3,253));
+  // specularMaterial(random(240, 250));
+  shininess(random(0,13));
 }
 
 function createCharAtPositionInColor(x,y,value, color){
   makeShimmer()
+  textSize(random(8,23));
   fill(color)
   text(value, x, y)
 }
 
 function fillCoordWithDigits(x, y, w, h, colory, increment){
-  for (var yc=0; yc<x-40; yc+=increment) {
-    for (var xc=0; xc<w-10; xc+=w/(increment/2)){
+  for (var yc=0; yc<y+random(13,50); yc+=increment) {
+    for (var xc=0; xc<w-random(3,22); xc+=w/(increment/2)){
     // for each point within bounds, draw a number between 0 and random range,
     //increment points after
       var colorIdx = floor(random(colory.length))
@@ -105,13 +109,14 @@ function fillCoordWithDigits(x, y, w, h, colory, increment){
 }
 
 function makeCity(bN, off) {
+  makeShimmer()
 	var tmp = off || 0
 	var bW = width / random(bN-6, bN+35);
 	for (var i = 0; i < bN; i++) {
     lightsteel = lerpColor(color(offwhite), color(bluesteel), bN/50);
     nightsteel = lerpColor(color(bluesteel), color(darkSteel), bN/50);
-    lightgrn = lerpColor(color('white'), color(techGreen), bN/50);
     aqua = lerpColor(color(bluesteel), color(techGreen), bN/50);
+    var lightgrn = lerpColor(color('white'), color(techGreen), bN/50);
     var allSteels = [lightsteel, nightsteel, aqua, lightgrn]
     var bH = random(10, height + 100)
     let rx = tmp + random(5)
@@ -128,9 +133,10 @@ function makeCity(bN, off) {
 				addWindowLight(bW, bH, k, j, tmp)
 			}
 		}
-    var c = random(100) < 50? topRedLight: 'black';
+    var c = random(100) < 50? topRedLight: litBuildingTop;
     stroke(c)
-    point((bW-bW/2), bH+1)
+    strokeWeight(bW*random(5,9)*.03)
+    point((bW-random(bW/2)), bH+1)
 		tmp += bW;
 	}
 }
@@ -141,7 +147,7 @@ function addWindowLight(bW, bH, k,j, tmp){
   var pointWidth = tmp+5+j+((bW-10)/5)/10
   var pointHeight = height-100-bH+20+k
   if (pointHeight * random(10)%13 < 3 && pointHeight > bH*.77){
-    stroke(litBuildingTop)
+    stroke(redBrown)
   }
   if (pointHeight%random(pointHeight/7) < 3){
     stroke('white')
@@ -149,16 +155,15 @@ function addWindowLight(bW, bH, k,j, tmp){
   if (pointHeight%random(pointHeight/5) < random(25)){
     stroke(bluesteel)
   }
-  strokeWeight(bW*0.135);
-  point(pointWidth, pointHeight)
+  strokeWeight(bW*0.2);
+  text(random(2), pointWidth, pointHeight)
 }
 
 function drawSun(val) {
-  var color = random(val)%2 > 0? lightYellow: offwhite
+  makeShimmer()
+  var color = random(val)%2 > 0? random(70)%2 > 4? random(72)%3 > 6?'yellow': lightYellow: orangeLights : offwhite
   //sun
   fill(color)
-  ellipse(-500 , -200, 200)
-  // //ground
-  fill(55, 235, 0)
-  rect(0, 350, 400, 50)
+  ellipse(-1*random(350,500) , -1*random(200,430), random(0,5))
+  // //groun
 }
