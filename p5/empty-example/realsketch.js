@@ -15,15 +15,16 @@ function setup() {
   textFont(font);
   textSize(fontsize);
   textAlign(CENTER, CENTER);
-  // frameRate(15)
+  frameRate(15)
   createLoop({
-    duration:2,
-    framesPerSecond: random(5),
+    duration:10,
+    framesPerSecond: random(9.20),
     gif:{
-      fileName:'city' + random(33,800).toString()+'.gif',
+      render:true,
+      fileName:'city' + random(25).toString()+'.gif',
       startLoop:0,
-      endLoop:1,
-      download:true,
+      endLoop:22,
+      download:false,
     }
   })
   // animLoop.noiseFrequency(10)
@@ -32,20 +33,20 @@ function setup() {
 var nightBlue = (0, 24, 72)
 var purpleSky = '#5F42C0'
 
-var litBuildingTop= '#88F7D3'
+var litBuildingTop= '#85F7D3'
 var whiteStar = '#fff4ea'
-var orangeLights = '#E89A3D'
-var offwhite = '#faf4f0'
+var orangeLights = '#E87A3D'
+var offwhite = '#f2f4f6'
 var bluesteel = '#5c7287'
 var whiteLight = '#F6F7F1'
 var darkSteel = '#171c21'
 var topRedLight = '#D25282'
-var lightYellow = '#ffffe2'
+var lightYellow = '#ffffe0'
 var deepRed = '#FA011F'
 
-var darkBuilding = '#432B36'
+var darkBuilding = '#432B39'
 
-var steelBuilding = '#9BAED7'
+var steelBuilding = '#9BAED8'
 var purNigthSky = '#0c1445'
 var redBrown = '#6B3825'
 var techGreen = '#39ff14'
@@ -60,35 +61,26 @@ function draw() {
 	stroke(255);
   drawSun(random(15,23))
   var lightgrn = lerpColor(color('white'), color(techGreen), random(45)/50);
-	for (var i=-0; i < 100; i++) {
-    push()
-    textSize(random(12,90));
+	for (var i=-0; i < 1400; i++) {
+    // push()
+    textSize(random(3,66));
     fill(random(7)< 5? random(7)< 3? lightgrn: techGreen: 'white')
 		text(floor(random(2)), random(width*(-2), width*4)+90, random(height/4, height*4)+80);
     noFill()
-    pop()
+    // pop()
 	}
 	noStroke();
 	fill(0);
 	rect(1200, height - 100, width, 100);
-  drawSun(random(67,90))
-
   // makeCity(random(750), random(30));
-  // makeCity(80, 47);
+  // // makeCity(80, 47);
   // // makeCity(random(1000), random(-10, 25));
-  // makeCity(random(70), -8);
-  // makeCity(random(30), random(-100,-10));
-  // makeCity(random(16, 46000), random(10,400));
+  // makeCity(20, -800);
+  makeCity(random(30), 1000);
+	makeCity(random(56,80), -1300);
+  makeCity(random(30), random(-100,-10));
+  makeCity(random(16, 46000), random(10,400));
   fill(random(40,255), random(1, 255), random(5,90))
-  ellipse(random(-70,70) , -1*random(45,55), random(88,300))
-  makeCity(5, -1200)
-  makeCity(16, -80);
-  makeCity(45, -5);
-  makeCity(15, 10);
-  makeCity(random(56,800), 40);
-
-
-
 }
 
 function makeShimmer(){
@@ -98,8 +90,8 @@ function makeShimmer(){
 }
 
 function createCharAtPositionInColor(x,y,value, color){
-  // makeShimmer()
-  textSize(random(5,60));
+  makeShimmer()
+  textSize(random(8,23));
   fill(color)
   text(value, x, y)
 }
@@ -119,7 +111,7 @@ function fillCoordWithDigits(x, y, w, h, colory, increment){
 function makeCity(bN, off) {
   makeShimmer()
 	var tmp = off || 0
-	var bW = width / random(bN-6);
+	var bW = width / random(bN-6, bN+35);
 	for (var i = 0; i < bN; i++) {
     lightsteel = lerpColor(color(offwhite), color(bluesteel), bN/50);
     nightsteel = lerpColor(color(bluesteel), color(darkSteel), bN/50);
@@ -141,10 +133,10 @@ function makeCity(bN, off) {
 				addWindowLight(bW, bH, k, j, tmp)
 			}
 		}
-    var c = random(100) < 50?random(40, 70) < 50?steels[floor(random(steels.length))]: topRedLight: litBuildingTop;
+    var c = random(100) < 50? topRedLight: litBuildingTop;
     stroke(c)
     strokeWeight(bW*random(5,9)*.03)
-    text(floor(random(3)), (bW-random(bW/2)), bH+1)
+    point((bW-random(bW/2)), bH+1)
 		tmp += bW;
 	}
 }
@@ -169,9 +161,8 @@ function addWindowLight(bW, bH, k,j, tmp){
 
 function drawSun(val) {
   makeShimmer()
-  ellipse(random(-200,3) , -1*random(-10,14), random(9,4))
   var color = random(val)%2 > 0? random(70)%2 > 4? random(72)%3 > 6?'yellow': lightYellow: orangeLights : offwhite
   //sun
   fill(color)
-  ellipse(random(-20,300) , -1*random(10,100), random(2,100))
+  ellipse(-1*random(350,500) , -1*random(200,430), random(0,5))
 }
