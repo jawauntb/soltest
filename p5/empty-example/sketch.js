@@ -15,16 +15,16 @@ function setup() {
   textFont(font);
   textSize(fontsize);
   textAlign(CENTER, CENTER);
-  frameRate(15)
+  // frameRate(15)
   createLoop({
-    duration:10,
-    framesPerSecond: random(9.20),
+    duration:7,
+    framesPerSecond: random(4),
     gif:{
       render:true,
       fileName:'city' + random(25).toString()+'.gif',
       startLoop:0,
-      endLoop:22,
-      download:false,
+      endLoop:3,
+      download:true,
     }
   })
   // animLoop.noiseFrequency(10)
@@ -111,7 +111,7 @@ function fillCoordWithDigits(x, y, w, h, colory, increment){
 function makeCity(bN, off) {
   makeShimmer()
 	var tmp = off || 0
-	var bW = width / random(bN-6, bN+35);
+	var bW = width / random(bN-6);
 	for (var i = 0; i < bN; i++) {
     lightsteel = lerpColor(color(offwhite), color(bluesteel), bN/50);
     nightsteel = lerpColor(color(bluesteel), color(darkSteel), bN/50);
